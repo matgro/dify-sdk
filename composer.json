@@ -39,7 +39,10 @@
     "test": "phpunit --configuration phpunit.xml.dist"
   },
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "platform": {
+      "php": "7.4.0"
+    }
   },
   "minimum-stability": "stable",
   "prefer-stable": true
