@@ -1,0 +1,46 @@
+{
+  "name": "matgro/dify-sdk",
+  "description": "PHP SDK for the Dify datasets and documents API.",
+  "type": "library",
+  "license": "MIT",
+  "archive": {
+    "exclude": [
+      "/.github",
+      "/.phpunit.result.cache",
+      "/phpunit.xml.dist",
+      "/tests",
+      "/vendor"
+    ]
+  },
+  "keywords": [
+    "dify",
+    "sdk",
+    "php",
+    "laravel"
+  ],
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Matgro\\Dify\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Matgro\\Dify\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit --configuration phpunit.xml.dist"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
