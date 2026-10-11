@@ -14,6 +14,8 @@ interface DifyClientInterface
 {
     public function listDatasets(int $page = 1, int $limit = 20): PaginatedResult;
 
+    public function getDataset(string $datasetId): Dataset;
+
     public function createDataset(string $name, ?string $description = null, string $indexingTechnique = 'high_quality', string $permission = 'only_me'): Dataset;
 
     public function updateDataset(string $datasetId, string $name): Dataset;

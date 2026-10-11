@@ -70,6 +70,29 @@ final class DifyClientTest extends TestCase
         self::assertSame('page=1&limit=20', $requests[0]['request']->getUri()->getQuery());
     }
 
+    public function testGetsDatasetById(): void
+    {
+        $requests = [];
+        $handler = HandlerStack::create(new MockHandler([
+            new Response(200, [], json_encode([
+                'id' => 'dataset/123',
+                'name' => 'Documentos Secretaría',
+                'description' => 'Material interno',
+                'permission' => 'only_me',
+            ])),
+        ]));
+        $handler->push(Middleware::history($requests));
+        $client = new DifyClient(new Client(['handler' => $handler]), 'https://dify.example.test', 'key');
+
+        $dataset = $client->getDataset('dataset/123');
+
+        self::assertSame('dataset/123', $dataset->id());
+        self::assertSame('Documentos Secretaría', $dataset->name());
+        self::assertSame('Material interno', $dataset->description());
+        self::assertSame('only_me', $dataset->permission());
+        self::assertSame('GET', $requests[0]['request']->getMethod());
+        self::assertSame('/v1/datasets/dataset%2F123', $requests[0]['request']->getUri()->getPath());
+    }
 
     public function testListsDocumentsWithPaginationAndOptionalStatus(): void
     {

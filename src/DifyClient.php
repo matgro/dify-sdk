@@ -54,6 +54,12 @@ final class DifyClient implements DifyClientInterface
         return PaginatedResult::fromArray($this->decodeResponse($response->getBody()->getContents()), [Dataset::class, 'fromArray']);
     }
 
+    public function getDataset(string $datasetId): Dataset
+    {
+        $response = $this->send('GET', '/v1/datasets/' . rawurlencode($datasetId), ['headers' => $this->headers()]);
+
+        return Dataset::fromArray($this->decodeResponse($response->getBody()->getContents()));
+    }
 
     public function createDataset(string $name, ?string $description = null, string $indexingTechnique = 'high_quality', string $permission = 'only_me'): Dataset
     {
